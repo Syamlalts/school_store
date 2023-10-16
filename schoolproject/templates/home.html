@@ -1,0 +1,231 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <!-- Mobile Metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+      <!-- Site Metas -->
+      <meta name="keywords" content="" />
+      <meta name="description" content="" />
+      <meta name="author" content="" />
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dependent Dropdown in Django</title>
+
+    <title>form page</title>
+
+      <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+      <!-- font awesome style -->
+      <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" />
+      <!-- Custom styles for this template -->
+      <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+      <!-- responsive style -->
+      <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+
+    <section class="inner_page_head" style="background-color:lightblue">
+         <div class="container_fuild">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="full">
+                     <h3>Fill up the form</h3>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+    <section class="why_section layout_padding">
+         <div class="container">
+
+            <div class="row">
+               <div class="col-lg-8 offset-lg-2">
+                  <div class="full">
+                      <section class="why_section layout_padding">
+         <div class="container">
+
+            <div class="row">
+               <div class="col-lg-8 offset-lg-2">
+                  <div class="full">
+
+                    <form action="form" method="post">
+                           {% csrf_token %}
+
+
+
+
+                        <fieldset>
+                           <input type="text" name="name" placeholder="enter the your name">
+                           <input type="date" name="date of birth" placeholder="enter your date of birth ">
+                           <input type="age" name="age" placeholder="enter  your age">
+                           <input type = "radio" name = "Gender" value = "Male">Male
+                           <input type = "radio" name = "Gender" value = "Female">Female
+                           <input type="phone number" name="phone number" placeholder="enter  your phone number">
+                           <input type="email" name="email" placeholder="enter the email">
+                           <input type="text" name="address" placeholder="enter your address">
+
+
+                            <b>Purpose</b>
+
+                            <select name="purpose" id="">
+
+                                 <option value="Enquiry">Enquiry</option>
+                                 <option value="Place Order"> Place Order</option>
+                                 <option value="Biology science">Return </option>
+
+                                 </select><br>
+                            <input type="checkbox" id="" name="Note Book" value="Note Book">
+                             <label for="Note Book">Note Book</label><br>
+                           <input type="checkbox" id="" name="pen" value="pen">
+                           <label for="pen"> pen </label><br>
+                           <input type="checkbox" id="" name="bag" value="bag">
+                           <label for="bag"> bag</label><br>
+                           <input type="checkbox" id="" name="exam peppers" value="exam peppers ">
+                           <label for="exam peppers">exam peppers</label><br>
+
+
+</fieldset>
+ </form>
+                      {% for msg in messages %}
+                    <b>{{msg}}</b>
+                  {% endfor %}
+
+<form method="post" id="personForm" data-cities-url="{% url 'ajax_load_cities' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $("#id_country").change(function () {
+        const url = $("#personForm").attr("data-cities-url");  // get the url of the load_cities view
+        const countryId = $(this).val();  // get the selected country ID from the HTML input
+
+        $.ajax({                       // initialize an AJAX request
+            url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
+            data: {
+                'country_id': countryId       // add the country id to the GET parameters
+            },
+            success: function (data) {   // data is the return of the load_cities view function
+                $("#id_city").html(data);  // replace the contents of the city input with the data that came from the server
+                /*
+
+                let html_data = '<option value="">---------</option>';
+                data.forEach(function (city) {
+                    html_data += <option value="${city.id}">${city.name}</option>
+                });
+                console.log(html_data);
+                $("#id_city").html(html_data);
+
+                */
+            }
+        });
+
+    });
+</script>
+       <a class="btn btn-danger" href="{% url 'logout'  %}">logout</a>
+
+
+
+
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+
+
+
+<footer class="footer_section">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-4 footer-col">
+                  <div class="footer_contact">
+                     <h4>
+                        Reach at..
+                     </h4>
+                     <div class="contact_link_box">
+                        <a href="">
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                        <span>
+                        Location
+                        </span>
+                        </a>
+                        <a href="">
+                        <i class="fa fa-phone" aria-hidden="true"></i>
+                        <span>
+                        Call +01 1234567890
+                        </span>
+                        </a>
+                        <a href="">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        <span>
+                        demo@gmail.com
+                        </span>
+                        </a>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-4 footer-col">
+                  <div class="footer_detail">
+                     <a href="index.html" class="footer-logo">
+                     Famms
+                     </a>
+                     <p>
+                        Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with
+                     </p>
+                     <div class="footer_social">
+                        <a href="">
+                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                        </a>
+                        <a href="">
+                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                        </a>
+                        <a href="">
+                        <i class="fa fa-linkedin" aria-hidden="true"></i>
+                        </a>
+                        <a href="">
+                        <i class="fa fa-instagram" aria-hidden="true"></i>
+                        </a>
+                        <a href="">
+                        <i class="fa fa-pinterest" aria-hidden="true"></i>
+                        </a>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-4 footer-col">
+                  <div class="map_container">
+                     <div class="map">
+                        <div id="googleMap"></div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="footer-info">
+               <div class="col-lg-7 mx-auto px-0">
+                  <p>
+                     &copy; <span id="displayYear"></span> All Rights Reserved By
+                     <a href="https://html.design/">Free Html Templates</a><br>
+
+                     Distributed By <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
+                  </p>
+               </div>
+            </div>
+         </div>
+      </footer>
+      <!-- footer section -->
+      <!-- jQery -->
+      <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+      <!-- popper js -->
+      <script src="{% static 'js/popper.min.js' %}"></script>
+      <!-- bootstrap js -->
+      <script src="{% static 'js/bootstrap.js' %}"></script>
+      <!-- custom js -->
+      <script src="{% static 'js/custom.js' %}"></script>
+   </body>
+</html>
